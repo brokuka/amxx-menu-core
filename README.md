@@ -192,6 +192,9 @@ public ds_guns(id, Array:items) {
     ArrayPushArray(items, item)
 
     mc_add_list_text(items, "=== Rifles ===", true) // display-only separator row
+    return 1                                         // REQUIRED: 1 = use these items;
+                                                     // any other value discards them and
+                                                     // falls back to the default player list
 }
 ```
 
