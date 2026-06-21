@@ -28,7 +28,7 @@ restrictions, placeholders, navigation history and lifecycle callbacks.
 - **[Universal Config System](https://github.com/brokuka/amxx-universal-config)** — the
   config engine Menu Core reads its `menu.ini` through. Its `universal_config.amxx`
   must be loaded **before** `menu_core.amxx`.
-- **ReAPI** (`reapi`) — used for player/team queries.
+- **[ReAPI](https://github.com/rehlds/ReAPI/releases)** (`reapi`) — used for player/team queries.
 
 > `scripting/include/universal_config.inc` is bundled here so Menu Core compiles
 > out of the box; the runtime `universal_config.amxx` plugin still has to be installed

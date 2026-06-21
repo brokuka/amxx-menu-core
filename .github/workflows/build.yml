@@ -28,7 +28,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # authenticated -> no API rate limit
         run: |
-          gh release download --repo s1lentq/reapi --pattern '*.zip' --dir reapi_dl
+          gh release download --repo rehlds/ReAPI --pattern '*.zip' --dir reapi_dl
           for z in reapi_dl/*.zip; do unzip -oq "$z" -d reapi; done
           find reapi -name 'reapi*.inc' -exec cp {} scripting/include/ \;
           ls scripting/include/reapi*.inc   # fail fast if includes were not found
