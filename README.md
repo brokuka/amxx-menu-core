@@ -58,7 +58,7 @@ restrictions, placeholders, navigation history and lifecycle callbacks.
 ```ini
 [MAIN]
 PREFIX = "!g[MyMenu]!y"
-KEY {
+KEY = {
     EXIT = "Exit"
     BACK = "Back"
     NEXT = "Next"
@@ -66,11 +66,16 @@ KEY {
 
 [CHOOSE_TEAM]
 TITLE = "\yChoose your team"
-ITEMS {
-    "Terrorists"   ""  "JOIN_T"   ""
-    "CT"           ""  "JOIN_CT"  ""
+; STRICT row columns: "Name" "Placeholder" "Condition" "Action" "Restriction" "Message" "Skip"
+ITEMS = {
+    "Terrorists" "" "" "JOIN_T"  "" "" ""
+    "CT"         "" "" "JOIN_CT" "" "" ""
 }
 ```
+
+> **Block syntax:** a block is opened with `KEY = {` (note the `=`) and closed by `}`
+> on its own line. STRICT `ITEMS` rows always carry the 7 columns above — the action
+> sits in the **4th** column, so empty leading columns must be kept as `""`.
 
 Plugin:
 
@@ -128,9 +133,9 @@ Every feature the engine exposes, with runnable snippets.
 ```ini
 [CHOOSE_TEAM]
 TITLE = "\yChoose your team"
-ITEMS {
-    "Terrorists"  ""  "JOIN_T"   ""
-    "CT"          ""  "JOIN_CT"  ""
+ITEMS = {
+    "Terrorists" "" "" "JOIN_T"  "" "" ""
+    "CT"         "" "" "JOIN_CT" "" "" ""
 }
 ```
 ```pawn
@@ -146,9 +151,9 @@ public act_join_t(id, const key[])  { /* ... */ }
 ```ini
 [MAIN_MENU]
 TITLE = "\yMain"
-ITEMS {
-    "Admin panel"  ""  "SHOW_ADMIN_MENU"  ""   ; opens [ADMIN_MENU], no wrapper needed
-    "Close"        ""  "CLOSE_MENU"       ""
+ITEMS = {
+    "Admin panel" "" "" "SHOW_ADMIN_MENU" "" "" ""   ; opens [ADMIN_MENU], no wrapper needed
+    "Close"       "" "" "CLOSE_MENU"      "" "" ""
 }
 ```
 
@@ -157,8 +162,10 @@ ITEMS {
 ```ini
 [LIST_SLAP]
 TITLE = "\ySlap a player"
-VIEW = "%name% \d[\r%health%hp\d]"
-ACTION = "DO_SLAP"
+; LIST VIEW columns: "Name" "Condition" "Action" "Restriction" "RestrictionMsg"
+VIEW = {
+    "%name% \d[\r%health%hp\d]" "" "DO_SLAP" "" ""
+}
 ```
 ```pawn
 mc_register_placeholder("name",   "ph_name")
@@ -191,8 +198,8 @@ public ds_guns(id, Array:items) {
 ### 5. Conditional item visibility
 
 ```ini
-ITEMS {
-    "Admin tools"  ""  "SHOW_ADMIN"  ""  ; shown only when IS_ADMIN is true
+ITEMS = {
+    "Admin tools" "" "IS_ADMIN" "SHOW_ADMIN" "" "" ""  ; condition (col 3) gates visibility
 }
 ```
 ```pawn
@@ -222,8 +229,8 @@ mc_register_restriction("VIP", "rest_vip", "This option is VIP-only")
 public bool:rest_vip(id, const restrictName[]) { return is_user_vip(id) }
 ```
 ```ini
-ITEMS {
-    "VIP skin"  ""  "GIVE_SKIN"  "VIP"   ; non-VIPs see the restriction message
+ITEMS = {
+    "VIP skin" "" "" "GIVE_SKIN" "VIP" "" ""   ; restriction (col 5) = VIP; non-VIPs see the message
 }
 ```
 
