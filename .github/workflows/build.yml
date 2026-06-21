@@ -25,13 +25,13 @@ jobs:
           version: '1.9.x'
 
       - name: Fetch ReAPI includes (latest release)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # authenticated -> no API rate limit
         run: |
-          url=$(curl -fsSL https://api.github.com/repos/s1lentq/reapi/releases/latest \
-                | grep -o 'https://[^"]*\.zip' | head -1)
-          echo "ReAPI: $url"
-          curl -fSL "$url" -o reapi.zip
-          unzip -oq reapi.zip -d reapi
+          gh release download --repo s1lentq/reapi --pattern '*.zip' --dir reapi_dl
+          for z in reapi_dl/*.zip; do unzip -oq "$z" -d reapi; done
           find reapi -name 'reapi*.inc' -exec cp {} scripting/include/ \;
+          ls scripting/include/reapi*.inc   # fail fast if includes were not found
 
       - name: Compile
         run: |
