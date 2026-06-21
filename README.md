@@ -128,6 +128,20 @@ See `scripting/include/menu_core.inc` for the fully documented native list.
 
 Both work in STRICT and LIST menus and may be combined in a space-separated action list.
 
+## AI-assisted development (Claude Code skill)
+
+This repo ships a **[Claude Code](https://claude.com/claude-code) skill** at
+[`.claude/skills/menu_core/SKILL.md`](.claude/skills/menu_core/SKILL.md).
+
+When you develop a plugin with Claude Code inside (or alongside) this repo, the AI
+automatically picks up the skill and gets a condensed, accurate guide to the engine —
+the `mc_*` API, the `menu.ini` format (STRICT vs LIST, `ITEMS`/`VIEW`/`FILTER` column
+order), built-in `SHOW_`/`CLOSE_MENU` actions, live-refresh rules and the common
+gotchas (e.g. a data source callback must `return 1`). It helps the model write correct
+menu code without you having to re-explain the engine each time.
+
+No setup needed — just have the skill file in your workspace.
+
 ## Use cases & recipes
 
 Every feature the engine exposes, with runnable snippets.
