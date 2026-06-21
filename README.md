@@ -1,4 +1,8 @@
-# Menu Core
+<p align="center">
+  <img src="assets/logo.png" alt="Menu Core" width="200">
+</p>
+
+<h1 align="center">Menu Core</h1>
 
 A **configuration-driven dynamic menu engine for AMX Mod X**. Build in-game menus
 from an INI config (or entirely in code) with conditional items, variant selection,
